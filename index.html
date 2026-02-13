@@ -35,7 +35,6 @@ h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 46px;
     color: #e63946;
-    margin-bottom: 10px;
 }
 
 p {
@@ -75,6 +74,13 @@ button {
     display: none;
 }
 
+/* GIFS */
+.gif {
+    width: 160px;
+    margin: 15px auto;
+    display: block;
+}
+
 /* GALERÍA */
 .galeria {
     display: grid;
@@ -90,7 +96,19 @@ button {
     border-radius: 15px;
 }
 
-/* ANIMACIONES */
+/* CORAZONES */
+.corazon {
+    position: fixed;
+    font-size: 22px;
+    animation: caer 3s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes caer {
+    from { transform: translateY(-10vh); opacity: 1; }
+    to { transform: translateY(110vh); opacity: 0; }
+}
+
 @keyframes aparecer {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
@@ -108,6 +126,11 @@ button {
         Tengo algo especial que preguntarte…<br>
         ¿Te gustaría tener una cita conmigo? ✨
     </p>
+
+    <!-- GIFS -->
+    <img id="gifTriste1" src="minion triste 1.gif" class="gif oculto">
+    <img id="gifTriste2" src="minions triste 2.gif" class="gif oculto">
+    <img id="gifFeliz" src="minio feliz.gif" class="gif oculto">
 
     <div class="buttons" id="botones">
         <button id="si" onclick="mostrarCita()">Sí 💖</button>
@@ -131,8 +154,8 @@ button {
     </p>
 
     <div class="galeria">
-        <img src="images-2.jpeg" alt="Madremia">
-        <img src="unnamed.jpg" alt="Madremia">
+        <img src="images-2.jpeg">
+        <img src="unnamed.jpg">
     </div>
 </div>
 
@@ -145,14 +168,21 @@ function manejarNo() {
     const btnSi = document.getElementById("si");
     const contenedor = document.getElementById("botones");
 
+    const gif1 = document.getElementById("gifTriste1");
+    const gif2 = document.getElementById("gifTriste2");
+
     contadorNo++;
 
     if (contadorNo === 1) {
         btnNo.innerText = "¿Segura? 😏";
+        gif1.classList.remove("oculto");
+        gif2.classList.add("oculto");
         contenedor.insertBefore(btnNo, btnSi);
     } 
     else if (contadorNo === 2) {
         btnNo.innerText = "¿Segurísima? 😌";
+        gif1.classList.add("oculto");
+        gif2.classList.remove("oculto");
         escalaSi += 0.15;
         btnSi.style.transform = `scale(${escalaSi})`;
         contenedor.insertBefore(btnSi, btnNo);
@@ -164,8 +194,25 @@ function manejarNo() {
 }
 
 function mostrarCita() {
-    document.getElementById("escena1").style.display = "none";
-    document.getElementById("escena2").style.display = "block";
+    document.getElementById("gifTriste1").classList.add("oculto");
+    document.getElementById("gifTriste2").classList.add("oculto");
+    document.getElementById("gifFeliz").classList.remove("oculto");
+
+    for (let i = 0; i < 30; i++) crearCorazon();
+
+    setTimeout(() => {
+        document.getElementById("escena1").style.display = "none";
+        document.getElementById("escena2").style.display = "block";
+    }, 1200);
+}
+
+function crearCorazon() {
+    const c = document.createElement("div");
+    c.className = "corazon";
+    c.innerText = "❤️";
+    c.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
 }
 </script>
 
