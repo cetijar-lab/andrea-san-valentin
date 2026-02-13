@@ -28,14 +28,12 @@ body {
     width: 100%;
     max-width: 420px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    animation: aparecer 0.8s ease;
 }
 
 h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 46px;
     color: #e63946;
-    margin-bottom: 10px;
 }
 
 p {
@@ -78,8 +76,8 @@ button {
 
 /* GIFS */
 .gif {
-    width: 170px;
-    margin: 20px auto 0;
+    width: 180px;
+    margin: 20px auto;
     display: block;
 }
 
@@ -111,12 +109,7 @@ button {
     to { transform: translateY(110vh); opacity: 0; }
 }
 
-/* ANIMACIONES */
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
+/* FADE */
 .fade {
     animation: fadeIn 1s ease forwards;
 }
@@ -139,23 +132,31 @@ button {
         y me encantaría que la respuesta sea sí 💖
     </p>
 
-    <p>
-        ¿Te gustaría tener una cita conmigo? ✨
-    </p>
+    <p>¿Te gustaría tener una cita conmigo? ✨</p>
 
     <div class="buttons">
-        <button id="si" onclick="mostrarCita()">Sí 💖</button>
+        <button id="si" onclick="aceptar()">Sí 💖</button>
         <button id="no" onclick="manejarNo()">No 😌</button>
     </div>
 
-    <!-- GIFS -->
     <img id="gifTriste1" src="minion_triste_1.gif" class="gif oculto">
     <img id="gifTriste2" src="minions_triste_2.gif" class="gif oculto">
-    <img id="gifFeliz" src="minio_feliz.gif" class="gif oculto">
 </div>
 
-<!-- ✨ ESCENA 2 -->
+<!-- 😍 ESCENA 2 -->
 <div class="card oculto" id="escena2">
+    <h1>🥰</h1>
+
+    <img src="minio_feliz.gif" class="gif">
+
+    <p style="font-style: italic;">
+        Sabía que dirías que sí 💖<br>
+        Esto me hace muy feliz ✨
+    </p>
+</div>
+
+<!-- 📍 ESCENA 3 -->
+<div class="card oculto" id="escena3">
     <h1>Nuestra cita ✨</h1>
 
     <p>
@@ -167,11 +168,6 @@ button {
     <p>
         Buena comida, buena plática  
         y una noche que promete ser especial 💖
-    </p>
-
-    <p style="margin-top:15px; font-style: italic;">
-        Gracias por decir que sí ✨<br>
-        Ya quiero verte 💕
     </p>
 
     <div class="galeria">
@@ -196,35 +192,33 @@ function manejarNo() {
         btnNo.innerText = "¿Segura? 😏";
         gif1.classList.remove("oculto");
         gif2.classList.add("oculto");
-    } 
-    else if (contadorNo === 2) {
+    } else if (contadorNo === 2) {
         btnNo.innerText = "¿Segurísima? 😌";
         gif1.classList.add("oculto");
         gif2.classList.remove("oculto");
         escalaSi += 0.15;
         btnSi.style.transform = `scale(${escalaSi})`;
-    } 
-    else {
+    } else {
         escalaSi += 0.1;
         btnSi.style.transform = `scale(${escalaSi})`;
     }
 }
 
-function mostrarCita() {
-    document.getElementById("gifTriste1").classList.add("oculto");
-    document.getElementById("gifTriste2").classList.add("oculto");
+function aceptar() {
+    document.getElementById("escena1").classList.add("oculto");
 
-    const gifFeliz = document.getElementById("gifFeliz");
-    gifFeliz.classList.remove("oculto");
+    const escena2 = document.getElementById("escena2");
+    escena2.classList.remove("oculto");
+    escena2.classList.add("fade");
 
     for (let i = 0; i < 30; i++) crearCorazon();
 
     setTimeout(() => {
-        document.getElementById("escena1").style.display = "none";
-        const escena2 = document.getElementById("escena2");
-        escena2.classList.remove("oculto");
-        escena2.classList.add("fade");
-    }, 1200);
+        escena2.classList.add("oculto");
+        const escena3 = document.getElementById("escena3");
+        escena3.classList.remove("oculto");
+        escena3.classList.add("fade");
+    }, 2500);
 }
 
 function crearCorazon() {
