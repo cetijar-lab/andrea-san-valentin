@@ -35,6 +35,7 @@ h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 46px;
     color: #e63946;
+    margin-bottom: 10px;
 }
 
 p {
@@ -57,7 +58,7 @@ button {
     font-size: 18px;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 130px;
+    min-width: 140px;
 }
 
 #si {
@@ -70,8 +71,28 @@ button {
     color: white;
 }
 
+.oculto {
+    display: none;
+}
+
+/* GALERÍA */
+.galeria {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* ANIMACIONES */
 @keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
 </style>
@@ -95,7 +116,7 @@ button {
 </div>
 
 <!-- ✨ ESCENA 2 -->
-<div class="card" id="escena2" style="display:none;">
+<div class="card oculto" id="escena2">
     <h1>Nuestra cita ✨</h1>
 
     <p>
@@ -108,6 +129,11 @@ button {
         Buena comida, buena plática  
         y una noche que promete ser especial 💖
     </p>
+
+    <div class="galeria">
+        <img src="images-2.jpeg" alt="Madremia">
+        <img src="unnamed.jpg" alt="Madremia">
+    </div>
 </div>
 
 <script>
@@ -123,13 +149,13 @@ function manejarNo() {
 
     if (contadorNo === 1) {
         btnNo.innerText = "¿Segura? 😏";
-        contenedor.insertBefore(btnNo, btnSi); // intercambia
+        contenedor.insertBefore(btnNo, btnSi);
     } 
     else if (contadorNo === 2) {
         btnNo.innerText = "¿Segurísima? 😌";
         escalaSi += 0.15;
         btnSi.style.transform = `scale(${escalaSi})`;
-        contenedor.insertBefore(btnSi, btnNo); // vuelve a mover
+        contenedor.insertBefore(btnSi, btnNo);
     } 
     else {
         escalaSi += 0.1;
