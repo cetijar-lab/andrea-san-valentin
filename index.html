@@ -28,7 +28,7 @@ body {
     width: 100%;
     max-width: 420px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    animation: aparecer 1s ease;
+    animation: aparecer 0.8s ease;
 }
 
 h1 {
@@ -56,6 +56,8 @@ button {
     border-radius: 30px;
     font-size: 18px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 130px;
 }
 
 #si {
@@ -68,26 +70,8 @@ button {
     color: white;
 }
 
-/* ESCENAS */
-.oculto {
-    display: none;
-}
-
-/* GALERÍA */
-.galeria {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.galeria img {
-    width: 100%;
-    border-radius: 15px;
-}
-
-/* ANIMACIONES */
 @keyframes aparecer {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 </style>
@@ -98,45 +82,64 @@ button {
 <!-- 💌 ESCENA 1 -->
 <div class="card" id="escena1">
     <h1>Andrea</h1>
+
     <p>
-        Tengo una pregunta muy importante…<br>
-        ¿Quieres tener una cita conmigo? ✨
+        Tengo algo especial que preguntarte…<br>
+        ¿Te gustaría tener una cita conmigo? ✨
     </p>
 
-    <div class="buttons">
+    <div class="buttons" id="botones">
         <button id="si" onclick="mostrarCita()">Sí 💖</button>
-        <button id="no" onclick="respuestaNo()">No 😌</button>
+        <button id="no" onclick="manejarNo()">No 😌</button>
     </div>
 </div>
 
 <!-- ✨ ESCENA 2 -->
-<div class="card oculto" id="escena2">
+<div class="card" id="escena2" style="display:none;">
     <h1>Nuestra cita ✨</h1>
 
     <p>
-        📍 <strong>Lugar:</strong> Restaurante / Café bonito<br>
-        📅 <strong>Fecha:</strong> Viernes 16 de febrero<br>
-        ⏰ <strong>Hora:</strong> 7:00 p.m.
+        📍 <strong>MADREMIA</strong><br>
+        📅 <strong>Sábado 14 de febrero</strong><br>
+        ⏰ <strong>9:00 p.m.</strong>
     </p>
 
     <p>
-        Me encantaría compartir este momento contigo 💖
+        Buena comida, buena plática  
+        y una noche que promete ser especial 💖
     </p>
-
-    <div class="galeria">
-        <img src="img1.jpg" alt="Lugar 1">
-        <img src="img2.jpg" alt="Lugar 2">
-    </div>
 </div>
 
 <script>
+let contadorNo = 0;
+let escalaSi = 1;
+
+function manejarNo() {
+    const btnNo = document.getElementById("no");
+    const btnSi = document.getElementById("si");
+    const contenedor = document.getElementById("botones");
+
+    contadorNo++;
+
+    if (contadorNo === 1) {
+        btnNo.innerText = "¿Segura? 😏";
+        contenedor.insertBefore(btnNo, btnSi); // intercambia
+    } 
+    else if (contadorNo === 2) {
+        btnNo.innerText = "¿Segurísima? 😌";
+        escalaSi += 0.15;
+        btnSi.style.transform = `scale(${escalaSi})`;
+        contenedor.insertBefore(btnSi, btnNo); // vuelve a mover
+    } 
+    else {
+        escalaSi += 0.1;
+        btnSi.style.transform = `scale(${escalaSi})`;
+    }
+}
+
 function mostrarCita() {
     document.getElementById("escena1").style.display = "none";
     document.getElementById("escena2").style.display = "block";
-}
-
-function respuestaNo() {
-    alert("Está bien 😊 gracias por tu honestidad");
 }
 </script>
 
