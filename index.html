@@ -76,8 +76,8 @@ button {
 
 /* GIFS */
 .gif {
-    width: 160px;
-    margin: 15px auto;
+    width: 170px;
+    margin: 20px auto 0;
     display: block;
 }
 
@@ -127,15 +127,15 @@ button {
         ¿Te gustaría tener una cita conmigo? ✨
     </p>
 
-    <!-- GIFS -->
-    <img id="gifTriste1" src="minion triste 1.gif" class="gif oculto">
-    <img id="gifTriste2" src="minions triste 2.gif" class="gif oculto">
-    <img id="gifFeliz" src="minio feliz.gif" class="gif oculto">
-
     <div class="buttons" id="botones">
         <button id="si" onclick="mostrarCita()">Sí 💖</button>
         <button id="no" onclick="manejarNo()">No 😌</button>
     </div>
+
+    <!-- GIFS (ABAJO DE LOS BOTONES) -->
+    <img id="gifTriste1" src="minion triste 1.gif" class="gif oculto">
+    <img id="gifTriste2" src="minions triste 2.gif" class="gif oculto">
+    <img id="gifFeliz" src="minio feliz.gif" class="gif oculto">
 </div>
 
 <!-- ✨ ESCENA 2 -->
@@ -166,7 +166,6 @@ let escalaSi = 1;
 function manejarNo() {
     const btnNo = document.getElementById("no");
     const btnSi = document.getElementById("si");
-    const contenedor = document.getElementById("botones");
 
     const gif1 = document.getElementById("gifTriste1");
     const gif2 = document.getElementById("gifTriste2");
@@ -177,7 +176,6 @@ function manejarNo() {
         btnNo.innerText = "¿Segura? 😏";
         gif1.classList.remove("oculto");
         gif2.classList.add("oculto");
-        contenedor.insertBefore(btnNo, btnSi);
     } 
     else if (contadorNo === 2) {
         btnNo.innerText = "¿Segurísima? 😌";
@@ -185,7 +183,6 @@ function manejarNo() {
         gif2.classList.remove("oculto");
         escalaSi += 0.15;
         btnSi.style.transform = `scale(${escalaSi})`;
-        contenedor.insertBefore(btnSi, btnNo);
     } 
     else {
         escalaSi += 0.1;
@@ -196,7 +193,9 @@ function manejarNo() {
 function mostrarCita() {
     document.getElementById("gifTriste1").classList.add("oculto");
     document.getElementById("gifTriste2").classList.add("oculto");
-    document.getElementById("gifFeliz").classList.remove("oculto");
+
+    const gifFeliz = document.getElementById("gifFeliz");
+    gifFeliz.classList.remove("oculto");
 
     for (let i = 0; i < 30; i++) crearCorazon();
 
