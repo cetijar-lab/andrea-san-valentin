@@ -71,8 +71,9 @@ button {
     color: white;
 }
 
+/* 👇 CLAVE: ocultar gana siempre */
 .oculto {
-    display: none;
+    display: none !important;
 }
 
 /* GIFS */
@@ -133,7 +134,7 @@ button {
         <button id="no" onclick="manejarNo()">No 😌</button>
     </div>
 
-    <!-- GIFS ABAJO -->
+    <!-- GIFS (OCULTOS INICIALMENTE) -->
     <img id="gifTriste1" src="minion_triste_1.gif" class="gif oculto">
     <img id="gifTriste2" src="minions_triste_2.gif" class="gif oculto">
     <img id="gifFeliz" src="minio_feliz.gif" class="gif oculto">
@@ -167,7 +168,6 @@ let escalaSi = 1;
 function manejarNo() {
     const btnNo = document.getElementById("no");
     const btnSi = document.getElementById("si");
-
     const gif1 = document.getElementById("gifTriste1");
     const gif2 = document.getElementById("gifTriste2");
 
@@ -202,7 +202,7 @@ function mostrarCita() {
 
     setTimeout(() => {
         document.getElementById("escena1").style.display = "none";
-        document.getElementById("escena2").style.display = "block";
+        document.getElementById("escena2").classList.remove("oculto");
     }, 1200);
 }
 
