@@ -71,7 +71,7 @@ button {
     color: white;
 }
 
-/* 👇 CLAVE: ocultar gana siempre */
+/* ocultar siempre */
 .oculto {
     display: none !important;
 }
@@ -111,9 +111,19 @@ button {
     to { transform: translateY(110vh); opacity: 0; }
 }
 
+/* ANIMACIONES */
 @keyframes aparecer {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.fade {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 </style>
 </head>
@@ -126,6 +136,10 @@ button {
 
     <p>
         Tengo algo especial que preguntarte…<br>
+        y me encantaría que la respuesta sea sí 💖
+    </p>
+
+    <p>
         ¿Te gustaría tener una cita conmigo? ✨
     </p>
 
@@ -134,7 +148,7 @@ button {
         <button id="no" onclick="manejarNo()">No 😌</button>
     </div>
 
-    <!-- GIFS (OCULTOS INICIALMENTE) -->
+    <!-- GIFS -->
     <img id="gifTriste1" src="minion_triste_1.gif" class="gif oculto">
     <img id="gifTriste2" src="minions_triste_2.gif" class="gif oculto">
     <img id="gifFeliz" src="minio_feliz.gif" class="gif oculto">
@@ -153,6 +167,11 @@ button {
     <p>
         Buena comida, buena plática  
         y una noche que promete ser especial 💖
+    </p>
+
+    <p style="margin-top:15px; font-style: italic;">
+        Gracias por decir que sí ✨<br>
+        Ya quiero verte 💕
     </p>
 
     <div class="galeria">
@@ -202,7 +221,9 @@ function mostrarCita() {
 
     setTimeout(() => {
         document.getElementById("escena1").style.display = "none";
-        document.getElementById("escena2").classList.remove("oculto");
+        const escena2 = document.getElementById("escena2");
+        escena2.classList.remove("oculto");
+        escena2.classList.add("fade");
     }, 1200);
 }
 
